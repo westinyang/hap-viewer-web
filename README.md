@@ -87,7 +87,7 @@ java -jar HapViewerWeb-*.jar  --server.port=8888 # 指定端口运行
 
 ## 视频演示
 
-x
+- https://www.bilibili.com/video/BV1FJ4m1p7fw
 
 ## 许可声明
 
