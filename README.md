@@ -1,6 +1,6 @@
 # HapViewerWeb
 
-<img src="src\main\resources\static\assets\img\favicon.png" width="128px" />
+<img src="src/main/resources/static/assets/img/favicon.png" width="128px" />
 
 ## 项目介绍
 
