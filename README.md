@@ -21,22 +21,9 @@
 - 手机版（Android）：[westinyang/hap-viewer-android](https://gitee.com/westinyang/hap-viewer-android)
 - **网页版（响应式）**：[westinyang/hap-viewer-web](https://gitee.com/westinyang/hap-viewer-web)
 
-## 开发技术
+## 下载安装
 
-> GraalVM让Java再次变得强大，使用`NativeImage`把程序编译为目标平台的可执行文件，脱离jvm直接运行，启动速度快，内存负载低。  
-> 关于GraalVM技术的最佳实践和教程，请参考我的另一个开源项目：[westinyang/java-graalvm-start](https://gitee.com/westinyang/java-graalvm-start)
-
-- 后端
-  - GraalVM JDK21 (Native Image)
-  - Spring Boot 3.x
-  - Hutool 5.x
-- 前端
-  - jquery 3.x
-  - bootstrap 5
-  - bootstrap-fileinput
-  - bootstrap-icons
-  - clipboard
-  - layer
+- https://gitee.com/westinyang/hap-viewer-web/releases
 
 ## 使用说明
 
@@ -70,6 +57,23 @@ Mac
 java -jar HapViewerWeb-*.jar # 默认端口9090
 java -jar HapViewerWeb-*.jar  --server.port=8888 # 指定端口运行
 ```
+
+## 开发技术
+
+> GraalVM让Java再次变得强大，使用`NativeImage`把程序编译为目标平台的可执行文件，脱离jvm直接运行，启动速度快，内存负载低。  
+> 关于GraalVM技术的最佳实践和教程，请参考我的另一个开源项目：[westinyang/java-graalvm-start](https://gitee.com/westinyang/java-graalvm-start)
+
+- 后端
+  - GraalVM JDK21 (Native Image)
+  - Spring Boot 3.x
+  - Hutool 5.x
+- 前端
+  - jquery 3.x
+  - bootstrap 5
+  - bootstrap-fileinput
+  - bootstrap-icons
+  - clipboard
+  - layer
 
 ## 截图预览
 
