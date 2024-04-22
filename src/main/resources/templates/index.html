@@ -1,0 +1,320 @@
+<!doctype html><!--suppress ALL-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>HAP查看器 Online | By westinyang</title>
+    <!-- Icon -->
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <!-- Bootstrap v5.1.3 -->
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Bootstrap FileInput v5.2.7  -->
+    <link rel="stylesheet" href="/plugins/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/plugins/bootstrap-fileinput/css/fileinput.min.css" media="all"/>
+    <link rel="stylesheet" href="/plugins/bootstrap-fileinput/themes/explorer/theme.min.css" media="all"/>
+    <!-- Index -->
+    <link rel="stylesheet" href="/assets/css/index.css">
+</head>
+<body>
+
+<!-- Nav -->
+<header class="p-2 bg-dark text-white border-bottom border-white">
+    <div class="container d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
+        <a class="navbar-brand text-light mx-0 py-0" href="/" style="height: 38px; line-height: 38px;">
+            <img src="/assets/img/favicon.png" width="38" height="38" class="d-inline-block align-top" alt="">
+            &nbsp;HAP查看器 Online
+        </a>
+        <div class="d-flex align-items-center">
+            <div class="w-100 me-3">
+            </div>
+            <div class="flex-shrink-0 dropdown">
+                <a href="#" class="d-block link-light text-decoration-none" id="dropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" style="width:38px;" class="btn btn-outline-light px-0 rounded-circle"><i class="bi bi-gear"></i></button>
+                </a>
+                <ul class="dropdown-menu text-small shadow bg-white" aria-labelledby="dropdownSettings" style="">
+                    <li><a class="dropdown-item" href="https://www.gitee.com/westinyang/hap-viewer-web" target="_blank"><i class="bi bi-github"></i> 开源仓库</a></li>
+                    <li><a class="dropdown-item" href="javascript:;" id="settings-qq"><i class="bi bi-tencent-qq"></i> 企鹅群组</a></li>
+                    <li><a class="dropdown-item" href="javascript:;" id="settings-wx"><i class="bi bi-wechat"></i> 微信群组</a></li>
+                    <li><a class="dropdown-item" href="https://space.bilibili.com/74433635" target="_blank"><i class="bi bi-tv"></i> 哔哩哔哩</a></li>
+                    <li><a class="dropdown-item" href="https://kaihongpai.feishu.cn/wiki/CqWLwJRadibxztkrIWZcogWxnXd" target="_blank"><i class="bi bi-person-fill"></i> 关于作者</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Title -->
+<div class="container px-3 py-3 pt-4 mx-auto text-center text-dark">
+    <h1 class="display-5">HAP查看器 Online</h1>
+    <p class="lead">支持解析 <span style='background-image:linear-gradient(to right,#00a6f9,#81bd0a);-webkit-background-clip: text;color: transparent;'>OpenHarmony(开源鸿蒙)</span>、<span style='background-image:linear-gradient(to right,#18181a,#1e6afb);-webkit-background-clip: text;color: transparent;'>HarmonyOS(鸿蒙)</span>、<span style='background-image:linear-gradient(to right,#f09d49,#d15430,#7d4354,#2f6cc0);-webkit-background-clip: text;color: transparent;'>HarmonyOS NEXT(鸿蒙星河版)</span> API9+(Stage模型)的应用安装包</p>
+</div>
+
+<!-- Content -->
+<div class="container">
+    <div class="row mb-2">
+        <div class="col-sm-12 col-md-6">
+            <div class="mb-2">
+                <div class="mb-2 bg-light">
+                    <!-- accept: application/vnd.android.package-archive || .apk -->
+                    <input type="file" id="file" name="file" accept=".hap" style="display: none;">
+                </div>
+                <!--
+                <button type="button" id="btn-upload" class="btn btn-primary">&emsp;上传&emsp;</button>
+                <button type="button" id="btn-reset" class="btn btn-outline-secondary">&emsp;重置&emsp;</button>
+                -->
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div id="app-info" class="card bg-light text-dark mb-2">
+                <div class="card-header"><i class="bi bi-exclamation-circle"></i> 应用信息</div>
+                <div class="card-body">
+                    <div class="d-flex">
+                        <img class="app-icon" src="/assets/img/icon-default_new.png">
+                        <div class="flex-fill text-end">
+                            <button type="button" class="btn btn-sm btn-outline-primary">权限信息</button>&nbsp;
+                            <button type="button" class="btn btn-sm btn-outline-secondary">更多信息</button>
+                        </div>
+                    </div>
+                    <ul class="list-group mt-3">
+                        <li class="list-group-item">应用名称：<span></span></li>
+                        <li class="list-group-item">应用包名：<span></span></li>
+                        <li class="list-group-item">版本名称：<span></span></li>
+                        <li class="list-group-item">版本号码：<span></span></li>
+                        <li class="list-group-item">编译目标：<span></span></li>
+                        <li class="list-group-item">技术探测：<span></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--
+    <footer class="pt-4 border-top">
+        <small class="d-block mb-3 text-muted">&copy; 2022 domain</small>
+    </footer>
+    -->
+
+    <button id="btn-copy-qq" th:data-clipboard-text="${QQGroupNum}" style="display:none;"></button>
+    <button id="btn-copy-wx" th:data-clipboard-text="${WeChatNum}" style="display:none;"></button>
+</div>
+
+<!-- Template -->
+<script type="text/html" id="tpl-info">
+    <div class="bg-light" style="padding:20px 20px 0px 20px;">
+        <div style="text-align:center;display:block;"><img th:src="${QQGroupQRCode}" style="min-width:238px;min-height:250px;"/></div>
+    </div>
+</script>
+
+<script type="text/html" id="tpl-info-wx">
+    <div class="bg-light" style="padding:20px 20px 20px 20px;">
+        <div style="font-size: 12px; text-align: center">添加：westin1024（备注：OH群）</div>
+    </div>
+</script>
+
+<script type="text/html" id="tpl-app-info">
+    <div class="d-flex">
+        <img class="app-icon" src="{{iconBase64}}">
+        <div class="flex-fill text-end">
+            <button type="button" class="btn btn-sm btn-outline-primary" onclick="showPermissionInfo()">权限信息</button>&nbsp;
+            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="showMoreInfo()">更多信息</button>
+        </div>
+    </div>
+    <ul class="list-group mt-3">
+        <li class="list-group-item">应用名称：<span>{{appName}}</span></li>
+        <li class="list-group-item">应用包名：<span>{{packageName}}</span></li>
+        <li class="list-group-item">版本名称：<span>{{versionName}}</span></li>
+        <li class="list-group-item">版本号码：<span>{{versionCode}}</span></li>
+        <li class="list-group-item">编译目标：<span>API{{targetAPIVersion}} ({{apiReleaseType}})</span></li>
+        <li class="list-group-item">技术探测：<span>{{techDesc}}</span></li>
+    </ul>
+</script>
+
+<!-- jQuery v3.5.1 -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap v5.1.3 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap FileInput v5.2.7  -->
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.7/js/fileinput.min.js"></script>
+<script src="/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
+<script src="/plugins/bootstrap-fileinput/themes/explorer/theme.min.js"></script>
+<!-- Layer v3.5.1 -->
+<script src="/plugins/layer/layer.js"></script>
+<!-- Clipboard v2.0.6 -->
+<script src="/plugins/clipboard/clipboard.min.js"></script>
+<script>
+    $(function () {
+        // 复制qq群号
+        var clipboard = new ClipboardJS('#btn-copy-qq');
+        clipboard.on('success', function(e) {
+            layer.msg("已复制群号");
+            e.clearSelection();
+        });
+        clipboard.on('error', function(e) {
+        });
+        // 复制wx号
+        var clipboard = new ClipboardJS('#btn-copy-wx');
+        clipboard.on('success', function(e) {
+            layer.msg("已复制号码");
+            e.clearSelection();
+        });
+        clipboard.on('error', function(e) {
+        });
+
+        $("#settings-qq").click(function () {
+            // 弹出提示
+            layer.open({
+                type: 1,
+                shade: 0.3,
+                shadeClose: true,
+                title: "<i class=\"bi bi-qr-code-scan\"></i> 企鹅群组",
+                content: $("#tpl-info").html(),
+                btn: ['复制群号', '关闭'],
+                yes: function(index, layero){
+                    $("#btn-copy-qq").trigger("click");
+                }
+            });
+        });
+
+        $("#settings-wx").click(function () {
+            // 弹出提示
+            layer.open({
+                type: 1,
+                shade: 0.3,
+                shadeClose: true,
+                title: "<i class=\"bi bi-qr-code-scan\"></i> 微信群组",
+                content: $("#tpl-info-wx").html(),
+                btn: ['复制号码', '关闭'],
+                yes: function(index, layero){
+                    $("#btn-copy-wx").trigger("click");
+                }
+            });
+        });
+
+        $("#file").show().fileinput({
+            theme: "explorer",
+            // 不填写uploadUrl，设置form表单地址就是表单提交
+            uploadUrl: '/upload',
+            /*上传额外数据*/
+            //uploadExtraDat: {},
+            required: true,
+            showUpload: false,
+            showRemove: true,
+            showBrowse: true,
+            showCancel: false,
+            /*显示右上角关闭按钮*/
+            showClose: false,
+            /*显示拖拽区域*/
+            dropZoneEnabled: !isMobile(),
+            /*显示预览区*/
+            showPreview: !isMobile(),
+            minFileCount: 1,
+            maxFileCount: 1,
+            maxTotalFileCount: 1,
+            /*隐藏缩略图内容*/
+            hideThumbnailContent: false,
+            /*语言*/
+            language: 'zh',
+            /*浏览区域点击*/
+            //browseOnZoneClick: true,
+            //dropZoneClickTitle: "",
+            /*输入框提示*/
+            msgPlaceholder: "请选择.hap文件 ...",
+            /*拖拽区域提示*/
+            dropZoneTitle: "拖拽.hap文件到这里 …",
+            /*允许的预览类型*/
+            allowedPreviewTypes: [],
+            /*允许的文件扩展名*/
+            allowedFileExtensions: ['hap'],
+            /*预览窗格中每个文件的操作设置*/
+            fileActionSettings: {
+                showUpload: false,
+                showRemove: false,
+                showZoom: false,
+            },
+            /*合并异步请求回调*/
+            mergeAjaxCallbacks: true,
+            ajaxSettings: {
+                beforeSend: function() {
+                },
+                complete: function () {
+                },
+                success: function (data) {
+                    $("#file").fileinput('clear');
+                    if (data.code !== 0) {
+                        layer.msg(data.message);
+                        return;
+                    }
+                    var d = data.data;
+                    window.appInfo = d;
+                    //console.log(d);
+                    // 信息模板
+                    let tmp_app_info = $("#tpl-app-info").html();
+                    // 循环d
+                    for (var key in d) {
+                        // 判断{{key}}是否在模板中存在
+                        if (tmp_app_info.indexOf("{{" + key + "}}") > -1) {
+                            // 替换
+                            tmp_app_info = tmp_app_info.replace("{{" + key + "}}", d[key]);
+                        }
+                    }
+                    $("#app-info .card-body").html(tmp_app_info);
+                },
+                error: function () {
+                }
+            }
+        }).on("filebatchselected", function(event, files) {
+            let _this = $(this);
+            // 兼容移动端选择文件不受限于 accept 属性
+            if (Object.keys(files).length) {
+                $("#unpack-info .card-body").html("<p class=\"mb-0\">处理中 ...</p>");
+                setTimeout(function () {
+                    _this.fileinput("upload");
+                }, 50);
+            }
+        });
+    });
+
+    function isMobile() {
+        if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i))) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function showPermissionInfo() {
+        if (window.appInfo == undefined) {
+            return;
+        }
+        let text = "无权限";
+        if (window.appInfo.requestPermissionNames != null && window.appInfo.requestPermissionNames.length > 0) {
+            text = JSON.stringify(window.appInfo.requestPermissionNames, null, '&emsp;').replace(/(\n\r|\r\n|\r|\n)/g, '<br/>')
+        }
+        layer.alert(text, {
+            title: "权限信息",
+            shade: 0.3,
+            shadeClose: true
+        });
+    }
+
+    function showMoreInfo() {
+        if (window.appInfo == undefined) {
+            return;
+        }
+        let text = "无更多信息";
+        if (window.appInfo.moreInfo != null) {
+            text = JSON.stringify(window.appInfo.moreInfo, null, '&emsp;').replace(/(\n\r|\r\n|\r|\n)/g, '<br/>')
+        }
+        layer.alert(text, {
+            title: "更多信息",
+            shade: 0.3,
+            shadeClose: true
+        });
+    }
+</script>
+</body>
+</html>
