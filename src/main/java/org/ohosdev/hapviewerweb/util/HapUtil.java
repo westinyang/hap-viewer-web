@@ -89,10 +89,11 @@ public class HapUtil {
             if (targetAbility != null) {
                 if (targetAbility.containsKey("icon")) {
                     String iconName = targetAbility.get("icon", String.class).split(":")[1];
-                    if ("layered_image".equals(iconName)) {
-                        iconName = "startIcon";
-                    }
                     String iconPath = String.format("resources/base/media/%s.png", iconName);
+                    if (zipFile.getEntry(iconPath) == null) {
+                        iconName = module.getByPath("app.icon", String.class).split(":")[1];
+                        iconPath = String.format("resources/base/media/%s.png", iconName);
+                    }
                     try {
                         hapInfo.iconPath = iconPath;
                         hapInfo.iconBytes = getEntryToBytes(zipFile, iconPath);
