@@ -8,8 +8,6 @@
 
 网页版的hap查看器，支持解析 OpenHarmony(开源鸿蒙)、HarmonyOS(鸿蒙)、HarmonyOS NEXT(鸿蒙星河版) API9+(Stage模型)的应用安装包
 
-演示地址：http://107.174.127.150:9090
-
 开源仓库
 
 - [Gitee](https://gitee.com/westinyang/hap-viewer-web)
